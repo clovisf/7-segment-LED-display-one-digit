@@ -1,4 +1,5 @@
-
+long oldtime= 0;
+int i= 0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -13,10 +14,10 @@ void setup() {
 
 }
 
-void ligadisplay(int seg){
+void displayControl(int seg){
   int segments[8]= {0};
 
-  if(seg == 0){
+  if(seg == 0 || seg > 9){ // DP, g, f, ....
     segments[0]=1;
     segments[1]= 1;
     segments[2]=0;
@@ -25,7 +26,7 @@ void ligadisplay(int seg){
     segments[5]=0;
     segments[6]=0;
     segments[7]=0;
-  }else if(seg == 1){
+  }else if(seg == 1){ // DP, g, f, ....
     segments[0]=1;
     segments[1]=1;
     segments[2]=1;
@@ -34,7 +35,7 @@ void ligadisplay(int seg){
     segments[5]=0;
     segments[6]=0;
     segments[7]=1;
-  }else if (seg == 2){
+  }else if (seg == 2){ // DP, g, f, ....
     segments[0]=1;
     segments[1]=0;
     segments[2]=1;
@@ -43,7 +44,7 @@ void ligadisplay(int seg){
     segments[5]=1;
     segments[6]=0;
     segments[7]=0;
-  }else if(seg == 3){
+  }else if(seg == 3){ // DP, g, f, ....
     segments[0]=1;
     segments[1]=0;
     segments[2]=1;
@@ -51,8 +52,8 @@ void ligadisplay(int seg){
     segments[4]=0;
     segments[5]=0;
     segments[6]=0;
-    segments[7]=0;
-  }else if(seg == 4){
+    segments[7]=0; 
+  }else if(seg == 4){ // DP, g, f, ....
     segments[0]=1;
     segments[1]=0;
     segments[2]=0;
@@ -61,7 +62,7 @@ void ligadisplay(int seg){
     segments[5]=0;
     segments[6]=0;
     segments[7]=1;
-  }else if(seg == 5){
+  }else if(seg == 5){ // DP, g, f, ....
     segments[0]=1;
     segments[1]=0;
     segments[2]=0;
@@ -70,7 +71,7 @@ void ligadisplay(int seg){
     segments[5]=0;
     segments[6]=1;
     segments[7]=0;
-  }else if(seg == 6){
+  }else if(seg == 6){ // DP, g, f, ....
     segments[0]=1;
     segments[1]=0;
     segments[2]=0;
@@ -79,7 +80,7 @@ void ligadisplay(int seg){
     segments[5]=0;
     segments[6]=1;
     segments[7]=0;
-  }else if(seg == 7){
+  }else if(seg == 7){ // DP, g, f, ....
     segments[0]=1;
     segments[1]=1;
     segments[2]=1;
@@ -88,7 +89,7 @@ void ligadisplay(int seg){
     segments[5]=0;
     segments[6]=0;
     segments[7]=0;
-  }else if(seg == 8){
+  }else if(seg == 8){ // DP, g, f, ....
     segments[0]=1;
     segments[1]=0;
     segments[2]= 0;   
@@ -97,7 +98,7 @@ void ligadisplay(int seg){
     segments[5]=0;
     segments[6]=0;
     segments[7]=0;
-  }else if(seg == 9){
+  }else if(seg == 9){ // DP, g, f, ....
     segments[0]=1;
     segments[1]=0;
     segments[2]=0;
@@ -120,11 +121,15 @@ void ligadisplay(int seg){
 void loop() {
   // put your main code here, to run repeatedly:
 
-  
-  ligadisplay(6); // DP, g, f, ....
-  delay(1000);
-  ligadisplay(3);
-  delay(1000);
+  if(millis() - oldtime > 500){ // enters the display function every "x" milisseconds
+    oldtime= millis();
 
-
+    if(i < 10){ // counts from 0 to 9
+      displayControl(i); //sends an integer between 0 and 9 to the display
+      i++;      
+    }else{
+      i= 0;
+    }
+        
+  }
 }
